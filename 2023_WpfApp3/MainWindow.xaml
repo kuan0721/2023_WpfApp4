@@ -1,0 +1,54 @@
+﻿<Window x:Class="_2023_WpfApp3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:_2023_WpfApp3"
+        mc:Ignorable="d"
+        Title="2023 WPF Painter" Height="600" Width="960">
+    <DockPanel LastChildFill="False">
+        <!-- 定義一個DockPanel，最後一個子元素不會填充剩餘空間 -->
+        <Menu DockPanel.Dock="Top" Height="25">
+            <!-- 在頂部添加一個高度為25的菜單 -->
+            <MenuItem Header="檔案" VerticalAlignment="Center">
+                <!-- 添加一個名為「檔案」的菜單項目 -->
+                <MenuItem Header="新畫布"/>
+                <!-- 添加一個子菜單項目「新畫布」 -->
+            </MenuItem>
+            <MenuItem Header="工具"/>
+            <!-- 添加另一個名為「工具」的菜單項目 -->
+        </Menu>
+        <ToolBarTray DockPanel.Dock="Top" Height="35" Background="#FFD5D0CE">
+            <!-- 在頂部添加一個高度為35、背景顏色為#FFD5D0CE的工具欄托盤 -->
+            <ToolBar HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="400" Background="#FFB6D5F9">
+                <!-- 添加一個置中的工具欄，高度為35，寬度為400，背景色為#FFB6D5F9 -->
+                <Label Content="筆刷色彩" Width="80" VerticalAlignment="Center" FontSize="14"/>
+                <!-- 添加一個名為「筆刷色彩」的標籤，寬度為80，字體大小為14 -->
+                <xctk:ColorPicker x:Name="strokeColorPicker" Width="120" DisplayColorAndName="True"/>
+                <!-- 添加一個寬度為120的ColorPicker控件，並顯示顏色和名稱 -->
+                <Slider x:Name="strokeThicknessSlider" Value="1" Minimum="1" Maximum="10" Width="100" VerticalAlignment="Center" IsSnapToTickEnabled="True" ValueChanged="strokeThicknessSlider_ValueChanged"/>
+                <!-- 添加一個名為「strokeThicknessSlider」的滑塊，設置最小值、最大值、寬度、初始值等屬性 -->
+                <Label Content="{Binding Value, ElementName=strokeThicknessSlider}" FontSize="14" FontWeight="Bold" Width="50" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                <!-- 添加一個綁定到滑塊值的標籤，用於顯示當前筆劃寬度 -->
+            </ToolBar>
+            <ToolBar Width="300" Background="#FFD2F6C7">
+                <!-- 添加另一個寬度為300，背景色為#FFD2F6C7的工具欄 -->
+                <RadioButton Content="直線" FontSize="14" Width="60" VerticalAlignment="Center" Click="ShapeButton_Click" Tag="Line" IsChecked="True"/>
+                <!-- 添加一個名為「直線」的單選按鈕，並綁定Click事件 -->
+                <RadioButton Content="矩形" FontSize="14" Width="60" VerticalAlignment="Center" Click="ShapeButton_Click" Tag="Rectangle"/>
+                <!-- 添加一個名為「矩形」的單選按鈕，並綁定Click事件 -->
+                <RadioButton Content="橢圓" FontSize="14" Width="60" VerticalAlignment="Center" Click="ShapeButton_Click" Tag="Ellipse"/>
+                <!-- 添加一個名為「橢圓」的單選按鈕，並綁定Click事件 -->
+            </ToolBar>
+        </ToolBarTray>
+        <Canvas x:Name="myCanvas" DockPanel.Dock="Top" Height="473" Background="#FFF7F4EA" MouseLeftButtonDown="myCanvas_MouseLeftButtonDown" MouseMove="myCanvas_MouseMove" MouseLeftButtonUp="myCanvas_MouseLeftButtonUp"/>
+        <!-- 在頂部添加一個名為「myCanvas」的畫布，設置高度、背景顏色和鼠標事件 -->
+        <StatusBar x:Name="myStatusBar" Width="955" DockPanel.Dock="Bottom" Background="#FFC4C0C0" Height="30">
+            <!-- 在底部添加一個名為「myStatusBar」的狀態欄，設置其寬度、背景顏色和高度 -->
+            <Label x:Name="coordinateLabel" Content="座標點" Width="212" Margin="50,0,0,0"/>
+            <!-- 在狀態欄中添加一個名為「coordinateLabel」的標籤，用於顯示坐標點 -->
+        </StatusBar>
+    </DockPanel>
+
+</Window>
